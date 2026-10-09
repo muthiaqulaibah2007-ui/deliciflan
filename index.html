@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DELICIFLAN — Homemade Caramel Pudding | The Taste of Sweet Elegance</title>
+  <meta name="description" content="DELICIFLAN — homemade caramel pudding dengan tekstur lembut dan manis yang pas. Open PO Senin–Kamis, ready setiap Jumat. Pesan sekarang via WhatsApp." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cellipse cx='50' cy='80' rx='44' ry='11' fill='%23F3E3C3'/%3E%3Ccircle cx='50' cy='56' r='36' fill='%23B45309'/%3E%3Ccircle cx='38' cy='45' r='9' fill='%23FFFFFF' opacity='.35'/%3E%3C/svg%3E" />
+
+  <!-- Flag JS availability (used to gate reveal animations safely) -->
+  <script>document.documentElement.classList.add('js');</script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: '#FFFDF9',
+            wash: '#FAF4E8',
+            caramel: { DEFAULT: '#B45309', dark: '#92400E' }
+          },
+          fontFamily: {
+            display: ['"Playfair Display"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    html { scroll-padding-top: 5.75rem; }
+    ::selection { background: #FDE68A; color: #1C1917; }
+
+    /* Nav link underline */
+    .nav-link { position: relative; padding-bottom: 2px; }
+    .nav-link::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 2px;
+      border-radius: 2px; background: #B45309;
+      transform: scaleX(0); transform-origin: left center; transition: transform .3s ease;
+    }
+    .nav-link:hover::after, .nav-link.nav-active::after { transform: scaleX(1); }
+    .nav-link.nav-active { color: #1C1917; }
+
+    /* Header elevation on scroll */
+    #siteHeader.is-scrolled { box-shadow: 0 10px 30px -18px rgba(120,53,15,.28); background: rgba(255,255,255,.92); }
+
+    /* Scroll reveal (only when JS is available) */
+    html.js [data-reveal] { opacity: 0; transform: translateY(26px); transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1); }
+    html.js [data-reveal].is-visible { opacity: 1; transform: translateY(0); }
+
+    /* Gentle motion */
+    @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    .float-anim   { animation: floaty 5.5s ease-in-out infinite; }
+    .float-anim-d { animation: floaty 6.5s ease-in-out 1.2s infinite; }
+    .pudding-float { animation: floaty 7s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+
+    /* Marquee */
+    @keyframes marquee { to { transform: translateX(-50%); } }
+    .marquee-track { animation: marquee 26s linear infinite; }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+
+    /* Smooth flavor color swap on the hero illustration */
+    #svgDefs stop { transition: stop-color .7s ease; }
+
+    /* Mobile menu entrance */
+    @keyframes menuIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+    .menu-enter { animation: menuIn .28s ease both; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      html { scroll-behavior: auto; }
+      html.js [data-reveal] { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+
+<body class="bg-cream text-stone-900 font-sans antialiased overflow-x-hidden">
+
+  <!-- Skip link -->
+  <a href="#home" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:rounded-lg focus:bg-amber-700 focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-white">Langsung ke konten</a>
+
+  <!-- Shared SVG gradient defs (hero illustration) -->
+  <svg id="svgDefs" width="0" height="0" class="absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="gSauceHero" gradientUnits="userSpaceOnUse" x1="210" y1="160" x2="210" y2="345">
+        <stop id="s1" offset="0" stop-color="#D97706" />
+        <stop id="s2" offset=".5" stop-color="#B45309" />
+        <stop id="s3" offset="1" stop-color="#7C2D12" />
+      </linearGradient>
+      <linearGradient id="gCustardHero" gradientUnits="userSpaceOnUse" x1="210" y1="196" x2="210" y2="332">
+        <stop id="c1" offset="0" stop-color="#FDF2CE" />
+        <stop id="c2" offset=".55" stop-color="#F7E3A6" />
+        <stop id="c3" offset="1" stop-color="#E9CD82" />
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <!-- ============ HEADER / NAVIGATION ============ -->
+  <header id="siteHeader" class="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-amber-100 transition-all duration-300">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 lg:h-[76px] items-center justify-between gap-4">
+
+        <a href="#home" class="group flex items-center gap-2.5" aria-label="DELICIFLAN — kembali ke beranda">
+          <span class="w-9 h-9 rounded-xl bg-amber-700 text-white flex items-center justify-center shadow-sm transition-transform duration-300 group-hover:rotate-6">
+            <i data-lucide="dessert" class="w-5 h-5" aria-hidden="true"></i>
+          </span>
+          <span class="font-display font-bold text-lg tracking-wide text-stone-900">DELICIFLAN</span>
+        </a>
+
+        <nav class="hidden lg:flex items-center gap-7" aria-label="Navigasi utama">
+          <a data-nav href="#home" class="nav-link text-sm font-semibold text-stone-600 hover:text-stone-900 transition-colors duration-300">Home</a>
+          <a data-nav href="#about" class="nav-link text-sm font-semibold text-stone-600 hover:text-stone-900 transition-colors duration-300">About Us</a>
+          <a data-nav href="#menu" class="nav-link text-sm font-semibold text-stone-600 hover:text-stone-900 transition-colors duration-300">Menu</a>
+          <a data-nav href="#review" class="nav-link text-sm font-semibold text-stone-600 hover:text-stone-900 transition-colors duration-300">Review</a>
+          <a data-nav href="#how-to-order" class="nav-link text-sm font-semibold text-stone-600 hover:text-stone-900 transition-colors duration-300">How to Order</a>
+          <a data-nav href="#contact" class="nav-link text-sm font-semibold text-stone-600 hover:text-stone-900 transition-colors duration-300">Contact</a>
+        </nav>
+
+        <div class="flex items-center gap-3">
+          <a href="https://wa.me/6281401864527?text=Halo%20DELICIFLAN%2C%20saya%20ingin%20pesan%20puding%20caramel." target="_blank" rel="noopener noreferrer"
+             class="hidden lg:inline-flex items-center gap-2 rounded-full bg-amber-700 px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-amber-700/20 transition-all duration-300 hover:bg-amber-800 hover:-translate-y-0.5 active:translate-y-0">
+            <i data-lucide="message-circle" class="w-4 h-4" aria-hidden="true"></i> Order PO
+          </a>
+          <button id="navToggle" type="button"
+                  class="lg:hidden w-10 h-10 rounded-xl border border-amber-200 bg-white text-stone-700 flex items-center justify-center transition-all duration-300 hover:bg-amber-50"
+                  aria-expanded="false" aria-controls="mobileMenu" aria-label="Buka menu navigasi">
+            <i data-lucide="menu" id="iconOpen" class="w-5 h-5" aria-hidden="true"></i>
+            <i data-lucide="x" id="iconClose" class="w-5 h-5 hidden" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="lg:hidden hidden border-t border-amber-100 bg-white/95 backdrop-blur-md">
+      <nav class="px-4 sm:px-6 py-4 flex flex-col gap-1" aria-label="Navigasi mobile">
+        <a href="#home" class="menu-link flex items-center justify-between rounded-xl px-4 py-3 text-sm font-semibold text-stone-700 hover:bg-amber-50 hover:text-amber-800 transition-all duration-300">Home <i data-lucide="chevron-right" class="w-4 h-4 text-amber-400" aria-hidden="true"></i></a>
+        <a href="#about" class="menu-link flex items-center justify-between rounded-xl px-4 py-3 text-sm font-semibold text-stone-700 hover:bg-amber-50 hover:text-amber-800 transition-all duration-300">About Us <i data-lucide="chevron-right" class="w-4 h-4 text-amber-400" aria-hidden="true"></i></a>
+        <a href="#menu" class="menu-link flex items-center justify-between rounded-xl px-4 py-3 text-sm font-semibold text-stone-700 hover:bg-amber-50 hover:text-amber-800 transition-all duration-300">Menu <i data-lucide="chevron-right" class="w-4 h-4 text-amber-400" aria-hidden="true"></i></a>
+        <a href="#review" class="menu-link flex items-center justify-between rounded-xl px-4 py-3 text-sm font-semibold text-stone-700 hover:bg-amber-50 hover:text-amber-800 transition-all duration-300">Review <i data-lucide="chevron-right" class="w-4 h-4 text-amber-400" aria-hidden="true"></i></a>
+        <a href="#how-to-order" class="menu-link flex items-center justify-between rounded-xl px-4 py-3 text-sm font-semibold text-stone-700 hover:bg-amber-50 hover:text-amber-800 transition-all duration-300">How to Order <i data-lucide="chevron-right" class="w-4 h-4 text-amber-400" aria-hidden="true"></i></a>
+        <a href="#contact" class="menu-link flex items-center justify-between rounded-xl px-4 py-3 text-sm font-semibold text-stone-700 hover:bg-amber-50 hover:text-amber-800 transition-all duration-300">Contact <i data-lucide="chevron-right" class="w-4 h-4 text-amber-400" aria-hidden="true"></i></a>
+        <a href="https://wa.me/6281401864527?text=Halo%20DELICIFLAN%2C%20saya%20ingin%20pesan%20puding%20caramel." target="_blank" rel="noopener noreferrer"
+           class="mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-amber-700 px-4 py-3.5 text-sm font-bold text-white shadow-md shadow-amber-700/20 transition-all duration-300 hover:bg-amber-800">
+          <i data-lucide="message-circle" class="w-4 h-4" aria-hidden="true"></i> Order PO via WhatsApp
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ HERO ============ -->
+    <section id="home" class="relative">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-10 pb-16 lg:pt-16 lg:pb-24">
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-10 items-center">
+
+          <!-- Left: copy -->
+          <div class="max-w-xl">
+            <span data-reveal class="inline-flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50 px-4 py-1.5 text-xs sm:text-sm font-semibold text-amber-800">
+              <i data-lucide="dessert" class="w-4 h-4" aria-hidden="true"></i> Homemade Caramel Pudding
+            </span>
+
+            <h1 data-reveal data-reveal-delay="80" class="mt-5 font-display font-bold text-[2.6rem] leading-[1.06] sm:text-6xl lg:text-[4.1rem] text-stone-900">
+              The Taste of
+              <span class="block italic text-amber-700">Sweet Elegance</span>
+            </h1>
+
+            <p data-reveal data-reveal-delay="160" class="mt-5 max-w-lg text-base sm:text-lg leading-relaxed text-stone-600">
+              Puding caramel lembut dengan manis yang pas, siap menemani waktu santaimu.
+            </p>
+
+            <div data-reveal data-reveal-delay="240" class="mt-8 flex flex-wrap items-center gap-3.5">
+              <a id="heroCta" href="https://wa.me/6281401864527?text=Halo%20DELICIFLAN%2C%20saya%20ingin%20pesan%20puding%20caramel." target="_blank" rel="noopener noreferrer"
+                 class="inline-flex items-center justify-center gap-2 rounded-full bg-amber-700 px-6 sm:px-7 py-3.5 text-sm sm:text-base font-bold text-white shadow-lg shadow-amber-700/25 transition-all duration-300 hover:bg-amber-800 hover:-translate-y-0.5 active:translate-y-0">
+                <i data-lucide="message-circle" class="w-5 h-5" aria-hidden="true"></i> Pesan Sekarang via WhatsApp
+              </a>
+              <a href="#menu"
+                 class="inline-flex items-center justify-center gap-2 rounded-full border border-stone-300 bg-white px-6 sm:px-7 py-3.5 text-sm sm:text-base font-bold text-stone-800 shadow-sm transition-all duration-300 hover:border-amber-700 hover:text-amber-700 hover:-translate-y-0.5">
+                Lihat Menu <i data-lucide="arrow-down" class="w-4 h-4" aria-hidden="true"></i>
+              </a>
+            </div>
+
+            <div data-reveal data-reveal-delay="320" class="mt-8">
+              <span class="inline-flex items-center gap-2 rounded-full bg-white border border-amber-100 px-4 py-2 text-xs sm:text-sm font-medium text-stone-600 shadow-sm">
+                <i data-lucide="clock" class="w-4 h-4 text-amber-700" aria-hidden="true"></i>
+                Open PO Senin – Kamis · Ready setiap Jumat
+              </span>
+            </div>
+          </div>
+
+          <!-- Right: interactive pudding card -->
+          <div data-reveal data-reveal-delay="150" class="relative w-full max-w-md lg:max-w-lg mx-auto lg:justify-self-end">
+            <div class="relative bg-white rounded-2xl sm:rounded-[2rem] border border-amber-100 shadow-xl p-5 sm:p-7">
+
+              <div class="flex items-center justify-between gap-3 mb-2">
+                <div class="inline-flex items-center gap-1 rounded-full bg-amber-50 border border-amber-100 p-1" role="group" aria-label="Pilih varian rasa">
+                  <button id="flavorClassic" type="button" data-flavor="classic" aria-pressed="true"
+                          class="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold transition-all duration-300 bg-white text-stone-900 shadow-sm">
+                    <span class="w-2 h-2 rounded-full bg-amber-600" aria-hidden="true"></span> Classic
+                  </button>
+                  <button id="flavorMatcha" type="button" data-flavor="matcha" aria-pressed="false"
+                          class="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold transition-all duration-300 text-stone-500 hover:text-stone-700">
+                    <span class="w-2 h-2 rounded-full bg-emerald-600" aria-hidden="true"></span> Matcha
+                  </button>
+                </div>
+                <span id="heroTag" class="inline-flex items-center rounded-full bg-amber-700 px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-white transition-colors duration-300">Best Seller</span>
+              </div>
+
+              <figure class="relative">
+                <svg id="heroArt" viewBox="0 0 420 420" class="w-full h-auto" role="img" aria-label="Ilustrasi puding caramel classic dengan saus karamel mengalir">
+                  <g class="pudding-float">
+                    <!-- backdrop -->
+                    <circle cx="210" cy="200" r="150" fill="#FBF0DC" />
+                    <circle cx="210" cy="200" r="170" fill="none" stroke="#EFDFC0" stroke-width="1.5" stroke-dasharray="1 9" stroke-linecap="round" />
+                    <circle cx="66" cy="118" r="3" fill="#EAD9B8" />
+                    <circle cx="352" cy="100" r="2.5" fill="#EAD9B8" />
+                    <circle cx="370" cy="240" r="3" fill="#F3E3C3" />
+                    <circle cx="56" cy="264" r="2.5" fill="#F3E3C3" />
+                    <!-- plate -->
+                    <ellipse cx="210" cy="344" rx="152" ry="20" fill="#B45309" opacity=".08" />
+                    <ellipse cx="210" cy="332" rx="138" ry="27" fill="#FFFFFF" stroke="#EFE4D2" stroke-width="2" />
+                    <ellipse cx="210" cy="328" rx="110" ry="18" fill="#FAF5EC" />
+                    <!-- spoon -->
+                    <g transform="rotate(-12 300 314)">
+                      <rect x="296" y="310" width="68" height="8" rx="4" fill="#EAE1D2" stroke="#DCCFB9" stroke-width="1" />
+                      <ellipse cx="294" cy="314" rx="17" ry="11" fill="#F3EDE1" stroke="#DCCFB9" stroke-width="1.5" />
+                      <ellipse cx="292" cy="313" rx="10" ry="6" fill="#E7DECC" />
+                    </g>
+                    <!-- caramel pool -->
+                    <ellipse cx="210" cy="322" rx="92" ry="12" fill="url(#gSauceHero)" />
+                    <!-- custard dome -->
+                    <path d="M118 318 C118 240 152 196 210 196 C268 196 302 240 302 318 C302 326 268 332 210 332 C152 332 118 326 118 318 Z" fill="url(#gCustardHero)" />
+                    <ellipse cx="262" cy="306" rx="30" ry="13" fill="#B45309" opacity=".07" />
+                    <ellipse cx="150" cy="286" rx="13" ry="26" fill="#FFFFFF" opacity=".3" transform="rotate(-12 150 286)" />
+                    <!-- glossy sauce with drips -->
+                    <path d="M114 296 C116 246 152 192 210 192 C268 192 304 246 306 296 C302 272 296 264 288 264 C281 264 279 272 278 282 C277 296 274 308 268 308 C262 308 259 296 258 284 C257 272 252 264 244 264 C235 264 230 272 228 286 C226 306 222 336 210 336 C198 336 194 306 192 286 C190 272 185 264 176 264 C168 264 163 272 162 282 C161 296 158 310 152 310 C146 310 143 298 142 286 C141 274 136 266 128 268 C122 270 118 282 114 296 Z" fill="url(#gSauceHero)" />
+                    <path d="M138 244 C150 216 176 204 204 202" fill="none" stroke="#FFFFFF" stroke-opacity=".32" stroke-width="5" stroke-linecap="round" />
+                    <ellipse cx="248" cy="210" rx="12" ry="5" fill="#FFFFFF" opacity=".22" transform="rotate(-14 248 210)" />
+                    <ellipse cx="268" cy="297" rx="2.5" ry="5" fill="#FFFFFF" opacity=".28" />
+                    <ellipse cx="210" cy="322" rx="3" ry="7" fill="#FFFFFF" opacity=".22" />
+                    <circle cx="104" cy="337" r="3" fill="#B45309" opacity=".45" />
+                    <circle cx="324" cy="340" r="2.5" fill="#B45309" opacity=".4" />
+                  </g>
+                </svg>
+
+                <!-- floating price chip -->
+                <div class="float-anim absolute -left-3 sm:-left-6 bottom-10 bg-white rounded-2xl shadow-lg border border-amber-100 px-4 py-2.5 flex items-center gap-2.5">
+                  <span class="w-8 h-8 rounded-full bg-amber-50 flex items-center justify-center text-amber-700">
+                    <i data-lucide="badge-check" class="w-4 h-4" aria-hidden="true"></i>
+                  </span>
+                  <span>
+                    <span class="block text-[10px] uppercase tracking-wider text-stone-400 font-bold">Harga</span>
+                    <span class="text-sm font-bold text-stone-900"><span id="heroPrice">Rp10.000</span> <span class="text-stone-400 font-medium">/ cup</span></span>
+                  </span>
+                </div>
+              </figure>
+
+              <figcaption class="text-center mt-2">
+                <p id="heroFlavorName" class="font-display italic text-lg text-stone-900">Classic Caramel Pudding</p>
+                <p class="text-xs text-stone-500 mt-0.5">Manisnya pas · Tekstur lembut · Saus melimpah</p>
+              </figcaption>
+            </div>
+
+            <!-- floating rating chip -->
+            <div class="float-anim-d absolute -top-4 -right-2 sm:-right-5 bg-white rounded-full shadow-lg border border-amber-100 pl-3 pr-4 py-2 flex items-center gap-2">
+              <span class="flex gap-0.5 text-amber-500" role="img" aria-label="Rating 5 dari 5 bintang">
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500" aria-hidden="true"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500" aria-hidden="true"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500" aria-hidden="true"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500" aria-hidden="true"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500" aria-hidden="true"></i>
+              </span>
+              <span class="text-xs font-bold text-stone-800">5.0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MARQUEE BAND ============ -->
+    <div class="marquee bg-amber-700 overflow-hidden" role="region" aria-label="Keunggulan DELICIFLAN">
+      <div class="marquee-track flex w-max items-center py-4">
+        <div class="flex items-center gap-10 pr-10">
+          <span class="font-display italic text-lg text-amber-50 whitespace-nowrap">Homemade</span><i data-lucide="sparkle" class="w-4 h-4 text-amber-300/80 shrink-0" aria-hidden="true"></i>
+          <span class="font-display italic text-lg text-amber-50 whitespace-nowrap">Freshly Made to Order</span><i data-lucide="sparkle" class="w-4 h-4 text-amber-300/80 shrink-0" aria-hidden="true"></i>
+          <span class="font-display italic text-lg text-amber-50 whitespace-nowrap">Manis yang Pas</span><i data-lucide="sparkle" class="w-4 h-4 text-amber-300/80 shrink-0" aria-hidden="true"></i>
+          <span class="font-display italic text-lg text-amber-50 whitespace-nowrap">No Artificial Preservatives</span><i data-lucide="sparkle" class="w-4 h-4 text-amber-300/80 shrink-0" aria-hidden="true"></i>
+          <span class="font-display italic text-lg text-amber-50 whitespace-nowrap">The Taste of Sweet Elegance</span><i data-lucide="sparkle" class="w-4 h-4 text-amber-300/80 shrink-0" aria-hidden="true"></i>
+          <span class="font-display italic text-lg text-amber-50 whitespace-nowrap">Ready Setiap Jumat</span><i data-lucide="sparkle" class="w-4 h-4 text-amber-300/80 shrink-0" aria-hidden="true"></i>
+        </div>
+        <div class="flex items-center gap-10 pr-10" aria-hidden="true">
+          <span class="font-display italic text-lg text-amber-50 whitespace-nowrap">Homemade</span><i data-lucide="sparkle" class="w-4 h-4 text-amber-300/80 shrink-0"></i>
+          <span class="font-display italic text-lg text-amber-50 whitespace-nowrap">Freshly Made to Order</span><i data-lucide="sparkle" class="w-4 h-4 text-amber-300/80 shrink-0"></i>
+          <span class="font-display italic text-lg text-amber-50 whitespace-nowrap">Manis yang Pas</span><i data-lucide="sparkle" class="w-4 h-4 text-amber-300/80 shrink-0"></i>
+          <span class="font-display italic text-lg text-amber-50 whitespace-nowrap">No Artificial Preservatives</span><i data-lucide="sparkle" class="w-4 h-4 text-amber-300/80 shrink-0"></i>
+          <span class="font-display italic text-lg text-amber-50 whitespace-nowrap">The Taste of Sweet Elegance</span><i data-lucide="sparkle" class="w-4 h-4 text-amber-300/80 shrink-0"></i>
+          <span class="font-display italic text-lg text-amber-50 whitespace-nowrap">Ready Setiap Jumat</span><i data-lucide="sparkle" class="w-4 h-4 text-amber-300/80 shrink-0"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ ABOUT ============ -->
+    <section id="about" class="py-16 lg:py-24">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+          <!-- Narrative -->
+          <div>
+            <p data-reveal class="text-xs font-bold uppercase tracking-[0.2em] text-amber-700">Cerita Kami</p>
+            <h2 data-reveal data-reveal-delay="80" class="mt-3 font-display font-bold text-3xl sm:text-4xl text-stone-900">
+              Tentang <span class="italic text-amber-700">DELICIFLAN</span>
+            </h2>
+            <p data-reveal data-reveal-delay="160" class="mt-5 text-[15px] sm:text-base leading-relaxed text-stone-600">
+              DELICIFLAN berawal dari keinginan sederhana untuk menghadirkan puding caramel yang enak, lembut, dan manisnya pas. Kami ingin menghadirkan dessert yang bisa dinikmati kapan saja, baik saat beristirahat setelah beraktivitas maupun ketika ingin menikmati waktu sendiri. Dari keinginan sederhana itu, DELICIFLAN hadir untuk berbagi kebahagiaan melalui setiap cup puding.
+            </p>
+
+            <div class="mt-7 flex flex-wrap gap-3">
+              <span data-reveal data-reveal-delay="220" class="inline-flex items-center gap-2 rounded-full bg-white border border-amber-100 px-4 py-2 text-sm font-semibold text-stone-700 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md">
+                <i data-lucide="wheat" class="w-4 h-4 text-amber-700" aria-hidden="true"></i> 100% Premium Ingredients
+              </span>
+              <span data-reveal data-reveal-delay="300" class="inline-flex items-center gap-2 rounded-full bg-white border border-amber-100 px-4 py-2 text-sm font-semibold text-stone-700 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md">
+                <i data-lucide="clock" class="w-4 h-4 text-amber-700" aria-hidden="true"></i> Freshly Made to Order
+              </span>
+              <span data-reveal data-reveal-delay="380" class="inline-flex items-center gap-2 rounded-full bg-white border border-amber-100 px-4 py-2 text-sm font-semibold text-stone-700 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md">
+                <i data-lucide="leaf" class="w-4 h-4 text-emerald-700" aria-hidden="true"></i> No Artificial Preservatives
+              </span>
+            </div>
+
+            <p data-reveal data-reveal-delay="440" class="mt-7 font-display italic text-lg text-amber-800">— Tim DELICIFLAN</p>
+          </div>
+
+          <!-- Aesthetic visual -->
+          <div data-reveal data-reveal-delay="150" class="relative max-w-md w-full mx-auto lg:justify-self-end">
+            <div class="relative overflow-hidden rounded-[2rem] bg-[#FBEFDD] border border-amber-100 p-8 lg:p-10">
+              <span class="absolute -top-10 -right-10 w-40 h-40 rounded-full border-2 border-dashed border-amber-200/80" aria-hidden="true"></span>
+              <i data-lucide="quote" class="w-9 h-9 text-amber-400" aria-hidden="true"></i>
+              <p class="relative mt-5 font-display italic text-[1.55rem] leading-snug text-stone-900">
+                &ldquo;The taste of <span class="text-amber-700">sweet elegance</span> — hadir dalam setiap cup puding buatan tangan.&rdquo;
+              </p>
+              <div class="mt-8 flex items-end justify-center gap-3">
+                <div class="-rotate-3 translate-y-1 transition-transform duration-300 hover:rotate-0">
+                  <svg viewBox="0 0 140 150" class="w-24 h-auto" role="img" aria-label="Cup puding caramel classic">
+                    <ellipse cx="70" cy="139" rx="42" ry="7" fill="#1C1917" opacity=".08" />
+                    <path d="M33 38 H107 L95 128 Q94 137 85 137 H55 Q46 137 45 128 Z" fill="#F8F2E7" />
+                    <path d="M38 46 H102 L91 126 Q90 132 84 132 H56 Q50 132 49 126 Z" fill="#FBEAC2" />
+                    <path d="M38 46 H102 V52 Q102 60 94 60 H46 Q38 60 38 52 Z" fill="#B45309" />
+                    <rect x="57" y="52" width="10" height="28" rx="5" fill="#B45309" />
+                    <rect x="81" y="52" width="9" height="20" rx="4.5" fill="#B45309" />
+                    <rect x="44" y="52" width="7" height="13" rx="3.5" fill="#B45309" />
+                    <ellipse cx="70" cy="46" rx="32" ry="5.5" fill="#D97706" />
+                    <ellipse cx="70" cy="45" rx="36" ry="7" fill="none" stroke="#E6D9C2" stroke-width="2" />
+                    <rect x="47" y="62" width="5" height="44" rx="2.5" fill="#FFFFFF" opacity=".55" transform="rotate(-2 49.5 84)" />
+                    <rect x="90" y="62" width="3" height="34" rx="1.5" fill="#FFFFFF" opacity=".35" />
+                  </svg>
+                </div>
+                <div class="rotate-2 transition-transform duration-300 hover:rotate-0">
+                  <svg viewBox="0 0 140 150" class="w-24 h-auto" role="img" aria-label="Cup puding matcha caramel">
+                    <ellipse cx="70" cy="139" rx="42" ry="7" fill="#1C1917" opacity=".08" />
+                    <path d="M33 38 H107 L95 128 Q94 137 85 137 H55 Q46 137 45 128 Z" fill="#F8F2E7" />
+                    <path d="M38 46 H102 L91 126 Q90 132 84 132 H56 Q50 132 49 126 Z" fill="#EFF3D6" />
+                    <path d="M38 46 H102 V52 Q102 60 94 60 H46 Q38 60 38 52 Z" fill="#047857" />
+                    <rect x="57" y="52" width="10" height="28" rx="5" fill="#047857" />
+                    <rect x="81" y="52" width="9" height="20" rx="4.5" fill="#047857" />
+                    <rect x="44" y="52" width="7" height="13" rx="3.5" fill="#047857" />
+                    <ellipse cx="70" cy="46" rx="32" ry="5.5" fill="#059669" />
+                    <ellipse cx="70" cy="45" rx="36" ry="7" fill="none" stroke="#E6D9C2" stroke-width="2" />
+                    <rect x="47" y="62" width="5" height="44" rx="2.5" fill="#FFFFFF" opacity=".55" transform="rotate(-2 49.5 84)" />
+                    <rect x="90" y="62" width="3" height="34" rx="1.5" fill="#FFFFFF" opacity=".35" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="float-anim absolute -bottom-6 -left-3 sm:-left-6 bg-white rounded-2xl shadow-lg border border-amber-100 px-4 py-3 flex items-center gap-3">
+              <span class="w-9 h-9 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-700">
+                <i data-lucide="leaf" class="w-4 h-4" aria-hidden="true"></i>
+              </span>
+              <span>
+                <span class="block text-sm font-bold text-stone-900">No Artificial Preservatives</span>
+                <span class="block text-xs text-stone-500">Tanpa pengawet buatan</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MENU ============ -->
+    <section id="menu" class="py-16 lg:py-24 bg-wash">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-xl mx-auto">
+          <p data-reveal class="text-xs font-bold uppercase tracking-[0.2em] text-amber-700">Menu Kami</p>
+          <h2 data-reveal data-reveal-delay="80" class="mt-3 font-display font-bold text-3xl sm:text-4xl text-stone-900">
+            Pilihan <span class="italic text-amber-700">Menu Favorit</span>
+          </h2>
+          <p data-reveal data-reveal-delay="160" class="mt-4 text-stone-600">
+            Dua varian signature yang dibuat fresh setiap minggu — pilih favoritmu.
+          </p>
+        </div>
+
+        <div class="mt-12 grid md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
+
+          <!-- Classic -->
+          <article data-reveal class="group relative bg-white rounded-3xl border border-amber-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col sm:flex-row">
+            <div class="relative h-44 sm:h-auto sm:w-44 lg:w-48 shrink-0 bg-amber-50 flex items-center justify-center">
+              <span class="absolute w-24 h-24 rounded-full border-2 border-dashed border-amber-200" aria-hidden="true"></span>
+              <svg viewBox="0 0 140 150" class="relative w-24 sm:w-28 h-auto transition-transform duration-300 group-hover:-rotate-3 group-hover:scale-105" role="img" aria-label="Classic Caramel Pudding">
+                <ellipse cx="70" cy="139" rx="42" ry="7" fill="#1C1917" opacity=".08" />
+                <path d="M33 38 H107 L95 128 Q94 137 85 137 H55 Q46 137 45 128 Z" fill="#F8F2E7" />
+                <path d="M38 46 H102 L91 126 Q90 132 84 132 H56 Q50 132 49 126 Z" fill="#FBEAC2" />
+                <path d="M38 46 H102 V52 Q102 60 94 60 H46 Q38 60 38 52 Z" fill="#B45309" />
+                <rect x="57" y="52" width="10" height="28" rx="5" fill="#B45309" />
+                <rect x="81" y="52" width="9" height="20" rx="4.5" fill="#B45309" />
+                <rect x="44" y="52" width="7" height="13" rx="3.5" fill="#B45309" />
+                <ellipse cx="70" cy="46" rx="32" ry="5.5" fill="#D97706" />
+                <ellipse cx="70" cy="45" rx="36" ry="7" fill="none" stroke="#E6D9C2" stroke-width="2" />
+                <rect x="47" y="62" width="5" height="44" rx="2.5" fill="#FFFFFF" opacity=".55" transform="rotate(-2 49.5 84)" />
+                <rect x="90" y="62" width="3" height="34" rx="1.5" fill="#FFFFFF" opacity=".35" />
+              </svg>
+            </div>
+            <div class="flex-1 p-6 lg:p-7">
+              <div class="flex items-start justify-between gap-3">
+                <div>
+                  <h3 class="font-display font-bold text-xl text-stone-900">Classic Caramel Pudding</h3>
+                  <p class="text-xs text-stone-500 mt-1">Saus karamel legit · Tekstur lembut</p>
+                </div>
+                <span class="shrink-0 rounded-full bg-amber-700 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white">Best Seller</span>
+              </div>
+              <p class="mt-3 text-sm leading-relaxed text-stone-600">Puding karamel klasik dengan tekstur lembut dan siraman saus karamel manis legit.</p>
+              <div class="mt-5 flex flex-wrap items-center justify-between gap-3">
+                <p class="font-display font-bold text-2xl text-amber-700">Rp10.000 <span class="font-sans text-sm font-medium text-stone-400">/ cup</span></p>
+                <a href="https://wa.me/6281401864527?text=Halo%20DELICIFLAN%2C%20saya%20ingin%20pesan%20Classic%20Caramel%20Pudding" target="_blank" rel="noopener noreferrer"
+                   class="inline-flex items-center gap-2 rounded-full bg-amber-700 px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-all duration-300 hover:bg-amber-800 hover:shadow-md active:scale-95">
+                  <i data-lucide="message-circle" class="w-4 h-4" aria-hidden="true"></i> Pesan Classic via WA
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Matcha -->
+          <article data-reveal data-reveal-delay="120" class="group relative bg-white rounded-3xl border border-amber-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col sm:flex-row">
+            <div class="relative h-44 sm:h-auto sm:w-44 lg:w-48 shrink-0 bg-emerald-50 flex items-center justify-center">
+              <span class="absolute w-24 h-24 rounded-full border-2 border-dashed border-emerald-200" aria-hidden="true"></span>
+              <svg viewBox="0 0 140 150" class="relative w-24 sm:w-28 h-auto transition-transform duration-300 group-hover:rotate-3 group-hover:scale-105" role="img" aria-label="Matcha Caramel Pudding">
+                <ellipse cx="70" cy="139" rx="42" ry="7" fill="#1C1917" opacity=".08" />
+                <path d="M33 38 H107 L95 128 Q94 137 85 137 H55 Q46 137 45 128 Z" fill="#F8F2E7" />
+                <path d="M38 46 H102 L91 126 Q90 132 84 132 H56 Q50 132 49 126 Z" fill="#EFF3D6" />
+                <path d="M38 46 H102 V52 Q102 60 94 60 H46 Q38 60 38 52 Z" fill="#047857" />
+                <rect x="57" y="52" width="10" height="28" rx="5" fill="#047857" />
+                <rect x="81" y="52" width="9" height="20" rx="4.5" fill="#047857" />
+                <rect x="44" y="52" width="7" height="13" rx="3.5" fill="#047857" />
+                <ellipse cx="70" cy="46" rx="32" ry="5.5" fill="#059669" />
+                <ellipse cx="70" cy="45" rx="36" ry="7" fill="none" stroke="#E6D9C2" stroke-width="2" />
+                <rect x="47" y="62" width="5" height="44" rx="2.5" fill="#FFFFFF" opacity=".55" transform="rotate(-2 49.5 84)" />
+                <rect x="90" y="62" width="3" height="34" rx="1.5" fill="#FFFFFF" opacity=".35" />
+              </svg>
+            </div>
+            <div class="flex-1 p-6 lg:p-7">
+              <div class="flex items-start justify-between gap-3">
+                <div>
+                  <h3 class="font-display font-bold text-xl text-stone-900">Matcha Caramel Pudding</h3>
+                  <p class="text-xs text-stone-500 mt-1">Matcha asli · Perpaduan manis gurih</p>
+                </div>
+                <span class="shrink-0 rounded-full bg-emerald-700 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white">Favorite</span>
+              </div>
+              <p class="mt-3 text-sm leading-relaxed text-stone-600">Perpaduan rasa matcha yang khas dengan kelembutan puding dan sentuhan manis karamel.</p>
+              <div class="mt-5 flex flex-wrap items-center justify-between gap-3">
+                <p class="font-display font-bold text-2xl text-emerald-700">Rp12.000 <span class="font-sans text-sm font-medium text-stone-400">/ cup</span></p>
+                <a href="https://wa.me/6281401864527?text=Halo%20DELICIFLAN%2C%20saya%20ingin%20pesan%20Matcha%20Caramel%20Pudding" target="_blank" rel="noopener noreferrer"
+                   class="inline-flex items-center gap-2 rounded-full bg-emerald-700 px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-all duration-300 hover:bg-emerald-800 hover:shadow-md active:scale-95">
+                  <i data-lucide="message-circle" class="w-4 h-4" aria-hidden="true"></i> Pesan Matcha via WA
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <p data-reveal class="mt-10 text-center text-sm text-stone-500">
+          Semua harga dalam Rupiah · Pemesanan via WhatsApp dengan sistem pre-order.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ REVIEW ============ -->
+    <section id="review" class="py-16 lg:py-24">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-xl mx-auto">
+          <p data-reveal class="text-xs font-bold uppercase tracking-[0.2em] text-amber-700">Testimoni</p>
+          <h2 data-reveal data-reveal-delay="80" class="mt-3 font-display font-bold text-3xl sm:text-4xl text-stone-900">
+            Apa Kata <span class="italic text-amber-700">Mereka?</span>
+          </h2>
+          <p data-reveal data-reveal-delay="160" class="mt-4 text-stone-600">Pengalaman manis dari para penikmat DELICIFLAN.</p>
+        </div>
+
+        <div class="mt-12 grid md:grid-cols-3 gap-6 lg:gap-8 items-start">
+          <figure data-reveal class="relative bg-white rounded-3xl border border-amber-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 p-7">
+            <i data-lucide="quote" class="absolute top-6 right-6 w-8 h-8 text-amber-100" aria-hidden="true"></i>
+            <div class="flex gap-1 text-amber-500" role="img" aria-label="Rating 5 dari 5 bintang">
+              <i data-lucide="star" class="w-4 h-4 fill-amber-500" aria-hidden="true"></i><i data-lucide="star" class="w-4 h-4 fill-amber-500" aria-hidden="true"></i><i data-lucide="star" class="w-4 h-4 fill-amber-500" aria-hidden="true"></i><i data-lucide="star" class="w-4 h-4 fill-amber-500" aria-hidden="true"></i><i data-lucide="star" class="w-4 h-4 fill-amber-500" aria-hidden="true"></i>
+            </div>
+            <blockquote class="mt-4 text-[15px] leading-relaxed text-stone-600">
+              &ldquo;Teksturnya lembut banget, saus karamelnya pas nggak bikin enek. Cocok banget buat nemenin ngambis atau nugas!&rdquo;
+            </blockquote>
+            <figcaption class="mt-6 flex items-center gap-3 pt-5 border-t border-stone-100">
+              <span class="w-10 h-10 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center text-sm font-bold" aria-hidden="true">SN</span>
+              <span>
+                <span class="block text-sm font-bold text-stone-900">Sarah N.</span>
+                <span class="block text-xs text-stone-500">Pelanggan DELICIFLAN</span>
+              </span>
+            </figcaption>
+          </figure>
+
+          <figure data-reveal data-reveal-delay="120" class="relative bg-white rounded-3xl border border-amber-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 p-7 md:mt-8">
+            <i data-lucide="quote" class="absolute top-6 right-6 w-8 h-8 text-emerald-100" aria-hidden="true"></i>
+            <div class="flex gap-1 text-amber-500" role="img" aria-label="Rating 5 dari 5 bintang">
+              <i data-lucide="star" class="w-4 h-4 fill-amber-500" aria-hidden="true"></i><i data-lucide="star" class="w-4 h-4 fill-amber-500" aria-hidden="true"></i><i data-lucide="star" class="w-4 h-4 fill-amber-500" aria-hidden="true"></i><i data-lucide="star" class="w-4 h-4 fill-amber-500" aria-hidden="true"></i><i data-lucide="star" class="w-4 h-4 fill-amber-500" aria-hidden="true"></i>
+            </div>
+            <blockquote class="mt-4 text-[15px] leading-relaxed text-stone-600">
+              &ldquo;Matcha Caramel-nya juara! Rasa pahit khas matcha ketutup pas sama manisnya karamel. Bakal langganan tiap hari Jumat.&rdquo;
+            </blockquote>
+            <figcaption class="mt-6 flex items-center gap-3 pt-5 border-t border-stone-100">
+              <span class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-sm font-bold" aria-hidden="true">RA</span>
+              <span>
+                <span class="block text-sm font-bold text-stone-900">Rizky A.</span>
+                <span class="block text-xs text-stone-500">Pelanggan DELICIFLAN</span>
+              </span>
+            </figcaption>
+          </figure>
+
+          <figure data-reveal data-reveal-delay="240" class="relative bg-white rounded-3xl border border-amber-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 p-7">
+            <i data-lucide="quote" class="absolute top-6 right-6 w-8 h-8 text-amber-100" aria-hidden="true"></i>
+            <div class="flex gap-1 text-amber-500" role="img" aria-label="Rating 5 dari 5 bintang">
+              <i data-lucide="star" class="w-4 h-4 fill-amber-500" aria-hidden="true"></i><i data-lucide="star" class="w-4 h-4 fill-amber-500" aria-hidden="true"></i><i data-lucide="star" class="w-4 h-4 fill-amber-500" aria-hidden="true"></i><i data-lucide="star" class="w-4 h-4 fill-amber-500" aria-hidden="true"></i><i data-lucide="star" class="w-4 h-4 fill-amber-500" aria-hidden="true"></i>
+            </div>
+            <blockquote class="mt-4 text-[15px] leading-relaxed text-stone-600">
+              &ldquo;Pudingnya fresh banget pas sampai, kemasannya juga rapi. Pas banget buat mood booster sore hari!&rdquo;
+            </blockquote>
+            <figcaption class="mt-6 flex items-center gap-3 pt-5 border-t border-stone-100">
+              <span class="w-10 h-10 rounded-full bg-stone-200 text-stone-700 flex items-center justify-center text-sm font-bold" aria-hidden="true">AP</span>
+              <span>
+                <span class="block text-sm font-bold text-stone-900">Amanda P.</span>
+                <span class="block text-xs text-stone-500">Pelanggan DELICIFLAN</span>
+              </span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HOW TO ORDER ============ -->
+    <section id="how-to-order" class="py-16 lg:py-24 bg-wash">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-xl mx-auto">
+          <p data-reveal class="text-xs font-bold uppercase tracking-[0.2em] text-amber-700">Cara Pesan</p>
+          <h2 data-reveal data-reveal-delay="80" class="mt-3 font-display font-bold text-3xl sm:text-4xl text-stone-900">
+            Sistem <span class="italic text-amber-700">Pre-Order</span>
+          </h2>
+          <p data-reveal data-reveal-delay="160" class="mt-4 text-stone-600">Tiga langkah mudah untuk menikmati puding fresh buatan DELICIFLAN.</p>
+        </div>
+
+        <ol class="relative grid md:grid-cols-3 gap-6 lg:gap-8 pt-8 mt-6">
+          <span aria-hidden="true" class="hidden md:block absolute top-8 left-[16%] right-[16%] border-t-2 border-dashed border-amber-300"></span>
+
+          <li data-reveal class="relative bg-white rounded-3xl border border-amber-100 shadow-sm hover:shadow-md transition-all duration-300 px-7 pb-8 pt-10 text-center">
+            <span class="absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-amber-700 text-white flex items-center justify-center shadow-lg shadow-amber-700/25 ring-4 ring-wash">
+              <i data-lucide="calendar-check" class="w-7 h-7" aria-hidden="true"></i>
+            </span>
+            <p class="font-display italic text-sm font-semibold text-amber-700">Step 01</p>
+            <h3 class="mt-2 font-display font-bold text-lg text-stone-900">Open PO · Senin – Kamis</h3>
+            <p class="mt-2.5 text-sm leading-relaxed text-stone-600">Pilih menu favoritmu dan amankan kuota pesanan via WhatsApp.</p>
+          </li>
+
+          <li data-reveal data-reveal-delay="120" class="relative bg-white rounded-3xl border border-amber-100 shadow-sm hover:shadow-md transition-all duration-300 px-7 pb-8 pt-10 text-center">
+            <span class="absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-amber-700 text-white flex items-center justify-center shadow-lg shadow-amber-700/25 ring-4 ring-wash">
+              <i data-lucide="chef-hat" class="w-7 h-7" aria-hidden="true"></i>
+            </span>
+            <p class="font-display italic text-sm font-semibold text-amber-700">Step 02</p>
+            <h3 class="mt-2 font-display font-bold text-lg text-stone-900">Process</h3>
+            <p class="mt-2.5 text-sm leading-relaxed text-stone-600">Puding dibuat segar <em class="italic">(freshly made)</em> dengan bahan pilihan menjelang hari pengiriman.</p>
+          </li>
+
+          <li data-reveal data-reveal-delay="240" class="relative bg-white rounded-3xl border border-amber-100 shadow-sm hover:shadow-md transition-all duration-300 px-7 pb-8 pt-10 text-center">
+            <span class="absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-amber-700 text-white flex items-center justify-center shadow-lg shadow-amber-700/25 ring-4 ring-wash">
+              <i data-lucide="package-check" class="w-7 h-7" aria-hidden="true"></i>
+            </span>
+            <p class="font-display italic text-sm font-semibold text-amber-700">Step 03</p>
+            <h3 class="mt-2 font-display font-bold text-lg text-stone-900">Ready &amp; Delivery · Jumat</h3>
+            <p class="mt-2.5 text-sm leading-relaxed text-stone-600">Puding siap dikirim atau diambil <em class="italic">(ready)</em> setiap hari Jumat.</p>
+          </li>
+        </ol>
+
+        <!-- Conversion note -->
+        <div data-reveal data-reveal-delay="160" class="mt-14 max-w-3xl mx-auto">
+          <div class="bg-amber-900 rounded-3xl p-7 sm:p-8 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-5 text-white">
+            <div class="flex items-center gap-4 text-center sm:text-left">
+              <span class="shrink-0 w-12 h-12 rounded-2xl bg-white/10 border border-white/10 flex items-center justify-center text-amber-300">
+                <i data-lucide="bell-ring" class="w-6 h-6" aria-hidden="true"></i>
+              </span>
+              <div>
+                <p class="font-bold text-lg">Kuota PO terbatas setiap minggu</p>
+                <p class="text-sm text-amber-100/80 mt-0.5">Amankan pesananmu sebelum hari Kamis ya!</p>
+              </div>
+            </div>
+            <a href="https://wa.me/6281401864527?text=Halo%20DELICIFLAN%2C%20saya%20ingin%20open%20PO%20puding%20untuk%20minggu%20ini" target="_blank" rel="noopener noreferrer"
+               class="shrink-0 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-bold text-amber-900 shadow-md transition-all duration-300 hover:bg-amber-50 hover:-translate-y-0.5 active:translate-y-0">
+              <i data-lucide="message-circle" class="w-4 h-4" aria-hidden="true"></i> Chat via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER / CONTACT ============ -->
+  <footer id="contact" class="bg-stone-900 text-stone-300">
+    <!-- caramel drip edge -->
+    <svg class="block w-full h-10 sm:h-12 lg:h-14" viewBox="0 0 480 64" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="#FAF4E8" d="M0 0 H480 V8 C476 8 475 44 468 44 C461 44 460 8 456 8 C452 8 451 26 444 26 C437 26 436 8 432 8 C428 8 427 58 420 58 C413 58 412 8 408 8 C404 8 403 32 396 32 C389 32 388 8 384 8 C380 8 379 48 372 48 C365 48 364 8 360 8 C356 8 355 24 348 24 C341 24 340 8 336 8 C332 8 331 54 324 54 C317 54 316 8 312 8 C308 8 307 36 300 36 C293 36 292 8 288 8 C284 8 283 46 276 46 C269 46 268 8 264 8 C260 8 259 28 252 28 C245 28 244 8 240 8 C236 8 235 60 228 60 C221 60 220 8 216 8 C212 8 211 34 204 34 C197 34 196 8 192 8 C188 8 187 50 180 50 C173 50 172 8 168 8 C164 8 163 26 156 26 C149 26 148 8 144 8 C140 8 139 42 132 42 C125 42 124 8 120 8 C116 8 115 30 108 30 C101 30 100 8 96 8 C92 8 91 56 84 56 C77 56 76 8 72 8 C68 8 67 24 60 24 C53 24 52 8 48 8 C44 8 43 40 36 40 C29 40 28 8 24 8 C20 8 19 32 12 32 C5 32 4 8 0 8 Z" />
+    </svg>
+
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-8 pb-10">
+      <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-12">
+
+        <!-- Brand -->
+        <div class="lg:col-span-5">
+          <a href="#home" class="inline-flex items-center gap-2.5 group" aria-label="DELICIFLAN — kembali ke beranda">
+            <span class="w-9 h-9 rounded-xl bg-amber-700 text-white flex items-center justify-center transition-transform duration-300 group-hover:rotate-6">
+              <i data-lucide="dessert" class="w-5 h-5" aria-hidden="true"></i>
+            </span>
+            <span class="font-display font-bold text-lg tracking-wide text-white">DELICIFLAN</span>
+          </a>
+          <p class="mt-4 font-display italic text-amber-200/90">The taste of sweet elegance</p>
+          <p class="mt-3 text-sm leading-relaxed text-stone-400 max-w-sm">
+            Homemade caramel pudding yang dibuat fresh setiap minggu dengan bahan pilihan — tanpa pengawet, manisnya pas.
+          </p>
+          <div class="mt-5 flex items-center gap-3">
+            <a href="https://instagram.com/deliciflan" target="_blank" rel="noopener noreferrer" aria-label="Instagram DELICIFLAN"
+               class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-stone-200 transition-all duration-300 hover:bg-amber-700 hover:border-amber-700 hover:text-white hover:-translate-y-0.5">
+              <i data-lucide="instagram" class="w-4.5 h-4.5 w-[18px] h-[18px]" aria-hidden="true"></i>
+            </a>
+            <a href="mailto:deliciflan@gmail.com" aria-label="Email DELICIFLAN"
+               class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-stone-200 transition-all duration-300 hover:bg-amber-700 hover:border-amber-700 hover:text-white hover:-translate-y-0.5">
+              <i data-lucide="mail" class="w-[18px] h-[18px]" aria-hidden="true"></i>
+            </a>
+            <a href="https://wa.me/6281401864527?text=Halo%20DELICIFLAN%2C%20saya%20ingin%20pesan%20puding%20caramel." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp DELICIFLAN"
+               class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-stone-200 transition-all duration-300 hover:bg-amber-700 hover:border-amber-700 hover:text-white hover:-translate-y-0.5">
+              <i data-lucide="message-circle" class="w-[18px] h-[18px]" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Contact -->
+        <nav class="lg:col-span-3" aria-label="Kontak DELICIFLAN">
+          <h3 class="text-xs font-bold uppercase tracking-[0.2em] text-amber-400/90 mb-4">Hubungi Kami</h3>
+          <ul class="space-y-3.5">
+            <li>
+              <a href="https://wa.me/6281401864527?text=Halo%20DELICIFLAN%2C%20saya%20ingin%20pesan%20puding%20caramel." target="_blank" rel="noopener noreferrer" class="group flex items-center gap-3">
+                <span class="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-amber-400 transition-all duration-300 group-hover:bg-amber-700 group-hover:text-white">
+                  <i data-lucide="message-circle" class="w-4 h-4" aria-hidden="true"></i>
+                </span>
+                <span>
+                  <span class="block text-xs text-stone-500">WhatsApp</span>
+                  <span class="block text-sm font-medium text-stone-100 transition-colors duration-300 group-hover:text-amber-300">+62 814-0186-4527</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="https://instagram.com/deliciflan" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-3">
+                <span class="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-amber-400 transition-all duration-300 group-hover:bg-amber-700 group-hover:text-white">
+                  <i data-lucide="instagram" class="w-4 h-4" aria-hidden="true"></i>
+                </span>
+                <span>
+                  <span class="block text-xs text-stone-500">Instagram</span>
+                  <span class="block text-sm font-medium text-stone-100 transition-colors duration-300 group-hover:text-amber-300">@deliciflan</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="mailto:deliciflan@gmail.com" class="group flex items-center gap-3">
+                <span class="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-amber-400 transition-all duration-300 group-hover:bg-amber-700 group-hover:text-white">
+                  <i data-lucide="mail" class="w-4 h-4" aria-hidden="true"></i>
+                </span>
+                <span>
+                  <span class="block text-xs text-stone-500">Email</span>
+                  <span class="block text-sm font-medium text-stone-100 transition-colors duration-300 group-hover:text-amber-300">deliciflan@gmail.com</span>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Quick links -->
+        <nav class="lg:col-span-2" aria-label="Navigasi footer">
+          <h3 class="text-xs font-bold uppercase tracking-[0.2em] text-amber-400/90 mb-4">Navigasi</h3>
+          <ul class="space-y-2.5 text-sm font-medium">
+            <li><a href="#home" class="text-stone-400 hover:text-amber-300 transition-colors duration-300">Home</a></li>
+            <li><a href="#about" class="text-stone-400 hover:text-amber-300 transition-colors duration-300">About Us</a></li>
+            <li><a href="#menu" class="text-stone-400 hover:text-amber-300 transition-colors duration-300">Menu</a></li>
+            <li><a href="#review" class="text-stone-400 hover:text-amber-300 transition-colors duration-300">Review</a></li>
+            <li><a href="#how-to-order" class="text-stone-400 hover:text-amber-300 transition-colors duration-300">How to Order</a></li>
+          </ul>
+        </nav>
+
+        <!-- Schedule -->
+        <div class="lg:col-span-2">
+          <h3 class="text-xs font-bold uppercase tracking-[0.2em] text-amber-400/90 mb-4">Jam Layanan PO</h3>
+          <ul class="space-y-3 text-sm">
+            <li class="flex items-center justify-between gap-3">
+              <span class="flex items-center gap-2 text-stone-300"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400" aria-hidden="true"></span>Sen – Kam</span>
+              <span class="text-stone-500">Open PO</span>
+            </li>
+            <li class="flex items-center justify-between gap-3">
+              <span class="flex items-center gap-2 text-stone-300"><span class="w-1.5 h-1.5 rounded-full bg-amber-400" aria-hidden="true"></span>Jumat</span>
+              <span class="text-stone-500">Ready &amp; Delivery</span>
+            </li>
+            <li class="flex items-center justify-between gap-3">
+              <span class="flex items-center gap-2 text-stone-300"><span class="w-1.5 h-1.5 rounded-full bg-stone-600" aria-hidden="true"></span>Sab – Min</span>
+              <span class="text-stone-500">Closed</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-12 border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-stone-500">
+        <p>&copy; 2026 DELICIFLAN. All rights reserved.</p>
+        <div class="flex items-center gap-5">
+          <p class="font-display italic text-sm text-amber-200/80">The taste of sweet elegance</p>
+          <a href="#home" class="inline-flex items-center gap-1.5 font-semibold text-stone-400 hover:text-amber-300 transition-colors duration-300">
+            Back to Top <i data-lucide="arrow-up" class="w-3.5 h-3.5" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating back-to-top -->
+  <button id="toTop" type="button" aria-label="Kembali ke atas"
+          class="fixed bottom-5 right-5 z-50 w-11 h-11 rounded-full bg-amber-700 text-white shadow-lg shadow-amber-700/30 flex items-center justify-center transition-all duration-300 hover:bg-amber-800 hover:-translate-y-1 opacity-0 pointer-events-none translate-y-3">
+    <i data-lucide="arrow-up" class="w-5 h-5" aria-hidden="true"></i>
+  </button>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    // Render all lucide icons
+    if (window.lucide) lucide.createIcons();
+
+    // ---------- Header elevation + back-to-top visibility ----------
+    var header = document.getElementById('siteHeader');
+    var toTop = document.getElementById('toTop');
+
+    function onScroll() {
+      if (header) header.classList.toggle('is-scrolled', window.scrollY > 8);
+      if (toTop) {
+        var show = window.scrollY > 560;
+        toTop.classList.toggle('opacity-0', !show);
+        toTop.classList.toggle('pointer-events-none', !show);
+        toTop.classList.toggle('translate-y-3', !show);
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    if (toTop) {
+      toTop.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    // ---------- Mobile menu ----------
+    var navToggle = document.getElementById('navToggle');
+    var mobileMenu = document.getElementById('mobileMenu');
+    var iconOpen = document.getElementById('iconOpen');
+    var iconClose = document.getElementById('iconClose');
+
+    function closeMenu() {
+      if (!mobileMenu || !navToggle) return;
+      mobileMenu.classList.add('hidden');
+      mobileMenu.classList.remove('menu-enter');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.setAttribute('aria-label', 'Buka menu navigasi');
+      if (iconOpen) iconOpen.classList.remove('hidden');
+      if (iconClose) iconClose.classList.add('hidden');
+    }
+
+    if (navToggle && mobileMenu) {
+      navToggle.addEventListener('click', function () {
+        var willOpen = mobileMenu.classList.contains('hidden');
+        if (willOpen) {
+          mobileMenu.classList.remove('hidden');
+          mobileMenu.classList.add('menu-enter');
+          navToggle.setAttribute('aria-expanded', 'true');
+          navToggle.setAttribute('aria-label', 'Tutup menu navigasi');
+          if (iconOpen) iconOpen.classList.add('hidden');
+          if (iconClose) iconClose.classList.remove('hidden');
+        } else {
+          closeMenu();
+        }
+      });
+      mobileMenu.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', closeMenu);
+      });
+      window.addEventListener('resize', function () {
+        if (window.innerWidth >= 1024) closeMenu();
+      });
+    }
+
+    // ---------- Scroll reveal ----------
+    var revealEls = document.querySelectorAll('[data-reveal]');
+    if ('IntersectionObserver' in window) {
+      var revealIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            revealIO.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      revealEls.forEach(function (el) {
+        var d = el.getAttribute('data-reveal-delay');
+        if (d) el.style.transitionDelay = d + 'ms';
+        revealIO.observe(el);
+      });
+    } else {
+      revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+    }
+
+    // ---------- Active nav highlighting ----------
+    var navLinks = Array.prototype.slice.call(document.querySelectorAll('[data-nav]'));
+    var sectionIds = ['home', 'about', 'menu', 'review', 'how-to-order', 'contact'];
+    if ('IntersectionObserver' in window) {
+      var secIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            navLinks.forEach(function (link) {
+              link.classList.toggle('nav-active', link.getAttribute('href') === '#' + entry.target.id);
+            });
+          }
+        });
+      }, { rootMargin: '-40% 0px -55% 0px' });
+      sectionIds.forEach(function (id) {
+        var s = document.getElementById(id);
+        if (s) secIO.observe(s);
+      });
+    }
+
+    // ---------- Hero flavor switcher ----------
+    var WA_BASE = 'https://wa.me/6281401864527?text=';
+    var FLAVORS = {
+      classic: {
+        label: 'Classic Caramel Pudding',
+        price: 'Rp10.000',
+        tag: 'Best Seller',
+        tagColor: 'bg-amber-700',
+        aria: 'Ilustrasi puding caramel classic dengan saus karamel mengalir',
+        href: WA_BASE + 'Halo%20DELICIFLAN%2C%20saya%20ingin%20pesan%20Classic%20Caramel%20Pudding',
+        sauce: ['#D97706', '#B45309', '#7C2D12'],
+        custard: ['#FDF2CE', '#F7E3A6', '#E9CD82']
+      },
+      matcha: {
+        label: 'Matcha Caramel Pudding',
+        price: 'Rp12.000',
+        tag: 'Favorite',
+        tagColor: 'bg-emerald-700',
+        aria: 'Ilustrasi puding matcha caramel dengan saus matcha mengalir',
+        href: WA_BASE + 'Halo%20DELICIFLAN%2C%20saya%20ingin%20pesan%20Matcha%20Caramel%20Pudding',
+        sauce: ['#34D399', '#059669', '#065F46'],
+        custard: ['#F5F8E0', '#E7ECBF', '#CFD8A4']
+      }
+    };
+
+    var classicBtn = document.getElementById('flavorClassic');
+    var matchaBtn = document.getElementById('flavorMatcha');
+    var heroPrice = document.getElementById('heroPrice');
+    var heroTag = document.getElementById('heroTag');
+    var heroFlavorName = document.getElementById('heroFlavorName');
+    var heroCta = document.getElementById('heroCta');
+    var heroArt = document.getElementById('heroArt');
+    var TAG_BASE = 'inline-flex items-center rounded-full px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-white transition-colors duration-300 ';
+
+    function setFlavor(key) {
+      var f = FLAVORS[key];
+      if (!f) return;
+
+      // Swap illustration gradient stops (smoothly transitioned via CSS)
+      [['s1', f.sauce[0]], ['s2', f.sauce[1]], ['s3', f.sauce[2]],
+       ['c1', f.custard[0]], ['c2', f.custard[1]], ['c3', f.custard[2]]].forEach(function (pair) {
+        var stop = document.getElementById(pair[0]);
+        if (stop) stop.style.stopColor = pair[1];
+      });
+
+      if (heroArt) heroArt.setAttribute('aria-label', f.aria);
+      if (heroPrice) heroPrice.textContent = f.price;
+      if (heroTag) { heroTag.textContent = f.tag; heroTag.className = TAG_BASE + f.tagColor; }
+      if (heroFlavorName) heroFlavorName.textContent = f.label;
+      if (heroCta) heroCta.href = f.href;
+
+      // Button states
+      [classicBtn, matchaBtn].forEach(function (btn) {
+        if (!btn) return;
+        var on = btn.getAttribute('data-flavor') === key;
+        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+        btn.classList.toggle('bg-white', on);
+        btn.classList.toggle('text-stone-900', on);
+        btn.classList.toggle('shadow-sm', on);
+        btn.classList.toggle('text-stone-500', !on);
+      });
+    }
+
+    if (classicBtn) classicBtn.addEventListener('click', function () { setFlavor('classic'); });
+    if (matchaBtn) matchaBtn.addEventListener('click', function () { setFlavor('matcha'); });
+    setFlavor('classic');
+  </script>
+</body>
+</html>
